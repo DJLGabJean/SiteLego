@@ -9,33 +9,69 @@
 	<header>
 		<nav>
 			<ul>
-				<li><a href="">Connexion</a></li>
-				<li><a href="#">Mes Favoris</a></li>
-				<li><a href="#">Mes Créations</a></li>
-				<li><a href="#">Contact</a></li>
+				<li><a>Favoris</a></li>
+				<li><a>Créations</a></li>
+				<li><a>Achats</a></li>
+				<li><a>Contact</a></li>
 			</ul>
+
+			<div class="welcome">
+				<h1>Bienvenue sur BuilderDream !</h1>
+				<img src="assets/lego-minifigures-17-71018-homme-epi-de-mais.jpg" alt="Figurine Lego">
+			</div>
+
 			<div class="search-container">
-				<form action="search">
-					<input type="text" placeholder="Rechercher...">
+				<form id="search-form">
+					<input type="text" placeholder="Rechercher un set de lego, thème, nom d'une pièce, ...">
 					<button type="submit" id="searchLogo">></button>
-			</form>
+				</form>
 		</nav>
 	</header>
-	
-	<main>
-		<section>
-			<h1>Titre de la section</h1>
-			<p>Contenu de la section</p>
-		</section>
-		
-		<section>
-			<h1>Titre de la section</h1>
-			<p>Contenu de la section</p>
-		</section>
-	</main>
 	
 	<footer>
 		<p>Copyright LEMAIRE Jean-Gabriel &copy; 2023</p>
 	</footer>
+
+	<script>
+		 const searchForm = document.querySelector('#search-form');
+      const resultsContainer = document.querySelector('#results');
+
+      searchForm.addEventListener('submit', event => {
+
+	  // Récupération du contenu HTML de la page web
+		fetch('https://www.example.com')
+  			.then(response => response.text())
+  			.then(data => {
+    			// Analyse du document HTML avec DOMParser
+    			const parser = new DOMParser();
+    			const htmlDoc = parser.parseFromString(data, 'text/html');
+
+    			// Recherche des balises "navrow sets", "navrow minifigs" et "navrow parts"
+    			const navrowSets = htmlDoc.querySelector('.navrow.sets');
+    			const navrowMinifigs = htmlDoc.querySelector('.navrow.minifigs');
+    			const navrowParts = htmlDoc.querySelector('.navrow.parts');
+
+    			// Création d'une nouvelle page HTML
+    			const newPage = document.createElement('html');
+
+    			// Ajout des balises "navrow sets", "navrow minifigs" et "navrow parts" s'ils existent
+    		if (navrowSets) {
+      newPage.appendChild(navrowSets);
+    }
+    if (navrowMinifigs) {
+      newPage.appendChild(navrowMinifigs);
+    }
+    if (navrowParts) {
+      newPage.appendChild(navrowParts);
+    }
+
+    // Affichage de la nouvelle page HTML dans le navigateur
+    document.open();
+    document.write(newPage.outerHTML);
+    document.close();
+  })
+  .catch(error => console.error(error));
+
+	</script>
 </body>
 </html>
