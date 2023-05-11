@@ -1,0 +1,84 @@
+/* Enlever les points des balises <li> */
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Centrer les éléments de la balise <nav> */
+nav {
+    text-align: center;
+}
+
+nav ul {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav li:last-child {
+    margin-right: 0;
+}
+
+/*Style pour la barre de recherche */
+.search-container {
+	float: right; /* Alignement à droite */
+	margin-top: 5px; /* Marge supérieure */
+}
+
+.search-container input[type=text] {
+	padding: 6px; /* Espacement interne */
+	border: none; /* Suppression de la bordure */
+	font-size: 17px; /* Taille de police */
+}
+
+.search-container button {
+	padding: 6px 10px; /* Espacement interne */
+	background: #ddd; /* Couleur de fond */
+	font-size: 17px; /* Taille de police */
+	border: none; /* Suppression de la bordure */
+	cursor: pointer; /* Curseur pointeur */
+}
+
+/* Style pour la barre de recherche */
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+.search-container form {
+    display: flex;
+    align-items: center;
+  }
+  
+.search-container input[type="text"] {
+    padding: 10px;
+    border: none;
+    border-radius: 3px 0 0 3px;
+  }
+  
+.search-container button[type="submit"] {
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 0 3px 3px 0;
+    cursor: pointer;
+  }
+
+/* Style pour le logo */
+#searchLogo {
+    border: none; /* Supprime la bordure */
+    background-color: transparent; /* Supprime la couleur de fond */
+    background-image: url(assets/search_logo.png); /* Ajoute l'image comme arrière-plan */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-size: cover; /* Ajuste la taille de l'image pour remplir complètement le bouton */
+    width: 45px; /* Ajuste la largeur du bouton */
+    height: 45px; /* Ajuste la hauteur du bouton */
+    padding: 0; /* Supprime le remplissage interne */
+}
