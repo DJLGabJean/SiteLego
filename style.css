@@ -24,26 +24,6 @@ nav li:last-child {
     margin-right: 0;
 }
 
-/*Style pour la barre de recherche */
-.search-container {
-	float: right; /* Alignement à droite */
-	margin-top: 5px; /* Marge supérieure */
-}
-
-.search-container input[type=text] {
-	padding: 6px; /* Espacement interne */
-	border: none; /* Suppression de la bordure */
-	font-size: 17px; /* Taille de police */
-}
-
-.search-container button {
-	padding: 6px 10px; /* Espacement interne */
-	background: #ddd; /* Couleur de fond */
-	font-size: 17px; /* Taille de police */
-	border: none; /* Suppression de la bordure */
-	cursor: pointer; /* Curseur pointeur */
-}
-
 /* Style pour la barre de recherche */
 .search-container {
     display: flex;
