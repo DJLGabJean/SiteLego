@@ -26,6 +26,14 @@
 					<button type="submit" id="searchLogo">></button>
 				</form>
 		</nav>
+
+		<div class="content">
+			<h2>Résultats de recherche</h2>
+			<div id="navrow-sets"></div>
+			<div id="navrow-minifigs"></div>
+			<div id="navrow-parts"></div>
+		</div>
+
 	</header>
 	
 	<footer>
@@ -33,45 +41,38 @@
 	</footer>
 
 	<script>
-		 const searchForm = document.querySelector('#search-form');
-      const resultsContainer = document.querySelector('#results');
+		const searchForm = document.querySelector('#search-form');
 
-      searchForm.addEventListener('submit', event => {
+	  	form.addEventListener('submit', function(event) {
+  			event.preventDefault();
+  			const searchTerm = event.target.querySelector('input').value;
 
-	  // Récupération du contenu HTML de la page web
-		fetch('https://www.example.com')
-  			.then(response => response.text())
-  			.then(data => {
-    			// Analyse du document HTML avec DOMParser
-    			const parser = new DOMParser();
-    			const htmlDoc = parser.parseFromString(data, 'text/html');
+  			fetch(`https://brickset.com/search?query=${searchTerm}&scope=All`)
 
-    			// Recherche des balises "navrow sets", "navrow minifigs" et "navrow parts"
-    			const navrowSets = htmlDoc.querySelector('.navrow.sets');
-    			const navrowMinifigs = htmlDoc.querySelector('.navrow.minifigs');
-    			const navrowParts = htmlDoc.querySelector('.navrow.parts');
+    		.then(response => response.text())
+    		.then(data => {
+      			const parser = new DOMParser();
+      			const htmlDoc = parser.parseFromString(data, 'text/html');
+      			const setsNavrow = htmlDoc.querySelector('.navrow.sets');
+      			const minifigsNavrow = htmlDoc.querySelector('.navrow.minifigs');
+      			const partsNavrow = htmlDoc.querySelector('.navrow.parts');
+      			const container = document.createElement('div');
 
-    			// Création d'une nouvelle page HTML
-    			const newPage = document.createElement('html');
+      			if (setsNavrow) {
+        			container.appendChild(setsNavrow);
+      			}
+      			if (minifigsNavrow) {
+        			container.appendChild(minifigsNavrow);
+      			}
+      			if (partsNavrow) {
+       				container.appendChild(partsNavrow);
+      			}
 
-    			// Ajout des balises "navrow sets", "navrow minifigs" et "navrow parts" s'ils existent
-    		if (navrowSets) {
-      newPage.appendChild(navrowSets);
-    }
-    if (navrowMinifigs) {
-      newPage.appendChild(navrowMinifigs);
-    }
-    if (navrowParts) {
-      newPage.appendChild(navrowParts);
-    }
-
-    // Affichage de la nouvelle page HTML dans le navigateur
-    document.open();
-    document.write(newPage.outerHTML);
-    document.close();
-  })
-  .catch(error => console.error(error));
-
+      			localStorage.setItem('results', container.innerHTML);
+      			window.location.href = 'results.html';
+    		})
+        	.catch(error => console.error(error));
+		});
 	</script>
 </body>
 </html>
