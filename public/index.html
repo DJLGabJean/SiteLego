@@ -48,10 +48,13 @@
 			console.log(searchTerm);
 			const url = `https://brickset.com/search?query=${searchTerm}&scope=All`;
 
-			
+
 			const dataToSend = {variable: url };
+			// Envoi de la variable dataToSend vers le serveur NodeJS
+
 
 			fetch('http://localhost:3000/endpoint', {
+			// Envoie d'une requête POST au serveur NodeJS
   				method: 'POST',
   				headers: {
     				'Content-Type': 'application/json'
