@@ -1,0 +1,119 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>BuildDream</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a>Favoris</a></li>
+				<li><a>Créations</a></li>
+				<li><a>Achats</a></li>
+				<li><a>Contact</a></li>
+			</ul>
+
+			<div class="welcome">
+				<h1>Bienvenue sur BuilderDream !</h1>
+				<img src="assets/lego-minifigures-17-71018-homme-epi-de-mais.jpg" alt="Figurine Lego">
+			</div>
+
+			<div class="search-container">
+				<form id="search-form">
+					<input type="text" placeholder="Rechercher un set de lego, thème, nom d'une pièce, ...">
+					<button type="submit" id="searchLogo">></button>
+				</form>
+		</nav>
+
+		<div class="content">
+			<h2>Résultats de recherche</h2>
+			<div id="navrow-sets"></div>
+			<div id="navrow-minifigs"></div>
+			<div id="navrow-parts"></div>
+		</div>
+
+	</header>
+	
+	<footer>
+		<p>Copyright LEMAIRE Jean-Gabriel &copy; 2023</p>
+	</footer>
+
+	<script type="text/javascript">
+		const searchForm = document.querySelector('#search-form');
+
+	  	searchForm.addEventListener('submit', function(event) {
+  			event.preventDefault();
+  			const searchTerm = event.target.querySelector('input').value.replace(/\s+/g, '+');
+			console.log(searchTerm);
+			const url = `https://brickset.com/search?query=${searchTerm}&scope=All`;
+
+			
+			const dataToSend = {variable: url };
+
+			fetch('http://localhost:3000/endpoint', {
+  				method: 'POST',
+  				headers: {
+    				'Content-Type': 'application/json'
+  				},
+  				body: JSON.stringify(dataToSend)
+			})
+			.then(response => {
+  			// Gérer la réponse du serveur
+			})
+			.catch(error => {
+  			// Gérer les erreurs
+			});
+		});
+
+		
+
+
+
+
+
+
+
+		// 	fetch(proxyUrl + url)
+  		// 		.then(response => response.text())
+  		// 		.then(data => console.log(data))
+  		// 		.catch(error => console.error(error));
+		// });
+
+		// 	fetch('https://brickset.com/search?query=${searchTerm}&scope=All', {mode: 'cors'})
+			
+
+    	// 	.then(response => response.text())
+    	// 	.then(data => {
+      	// 		const parser = new DOMParser();
+      	// 		const htmlDoc = parser.parseFromString(data, 'text/html');
+      	// 		const setsNavrow = htmlDoc.querySelector('.navrow.sets');
+      	// 		const minifigsNavrow = htmlDoc.querySelector('.navrow.minifigs');
+      	// 		const partsNavrow = htmlDoc.querySelector('.navrow.parts');
+      	// 		const container = document.createElement('div');
+
+		// 		console.log(parser);
+		// 		console.log(htmlDoc);
+		// 		console.log(setsNavrow);
+		// 		console.log(minifigsNavrow);
+		// 		console.log(partsNavrow);
+		// 		console.log(container);
+
+      	// 		if (setsNavrow) {
+        // 			container.appendChild(setsNavrow);
+      	// 		}
+      	// 		if (minifigsNavrow) {
+        // 			container.appendChild(minifigsNavrow);
+      	// 		}
+      	// 		if (partsNavrow) {
+       	// 			container.appendChild(partsNavrow);
+      	// 		}
+
+      	// 		localStorage.setItem('results', container.innerHTML);
+      	// 		window.location.href = 'results.html';
+    	// 	})
+        // 	.catch(error => console.error(error));
+		// });
+	</script>
+</body>
+</html>

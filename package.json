@@ -1,0 +1,15 @@
+{
+  "name": "webserver",
+  "version": "1.0.0",
+  "description": "Description de mon projet",
+  "main": "server.js",
+  "dependencies": {
+    "require-stack": "^1.0.1",
+    "request": "^2.88.2",
+    "express": "^4.17.1",
+    "node-fetch": "^3.0.0",
+    "cheerio": "^1.0.0-rc.10"
+  }
+}
+
+  
