@@ -46,13 +46,19 @@ app.post('/endpoint', async (req, res) => {
 
     // Enregistrement de l'objet JSON dans une variable jsonString
     console.log(result);
-    const jsonString = JSON.stringify(result);
+    const jsonString = JSON.stringify(result, null, 2);
 
-    // Enregistrer le texte JSON dans un fichier data.json et renvoie de l'objet JSON en réponse au client
+    // Enregistrer le chemin du fichier JSON
     const filePath = path.join(__dirname, 'public', 'data.json');
+
+    // Supprimer le fichier JSON s'il existe déjà
+    if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+    }
+
+    // Enregistrer le fichier JSON
     fs.writeFileSync(filePath, jsonString, 'utf-8');
     res.json(result);
-
 
   } catch (error) {
     console.error(error);
@@ -63,3 +69,4 @@ app.post('/endpoint', async (req, res) => {
 app.listen(3000, () => {
   console.log('Serveur en écoute sur le port 3000');
 });
+
