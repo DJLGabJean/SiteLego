@@ -5,11 +5,11 @@ const app = express();
 const path = require('path');
 //  Module cheerio permet d'analyser et extraire les balises souhaitées.
 const cheerio = require('cheerio');
+// Module fs permet de lire et écrire des fichiers (Déjà installé avec Node.js donc pas besoin de l'installer avec le package.json)
+const fs = require('fs');
 
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(express.json());
-
 app.post('/endpoint', async (req, res) => {
   const variableFromClient = req.body.variable;
   console.log(variableFromClient);
@@ -24,25 +24,36 @@ app.post('/endpoint', async (req, res) => {
     // Charge le contenu HTML dans cheerio pour faciliter l'analyse
     const $ = cheerio.load(html);
 
-    // Exemple : Extraction du titre de la page
-    const pageTitle = $('title').text();
+    // Extraction de la balise navrow sets
+    const sets = $('.navrow.sets').html();
 
-    // Exemple : Extraction des liens de la page
-    const links = [];
-    $('a').each((index, element) => {
-      const href = $(element).attr('href');
-      links.push(href);
-    });
+    // Extraction de la balise navrow minifigs
+    const minifigs = $('.navrow.minifigs').html();
+
+    // Extraction de la balise navrow parts
+    const parts = $('.navrow.parts').html();
+
+    // Extraction de la balise navrow reviews
+    const news = $('.navrow.news').html();
 
     // Construit l'objet JSON à renvoyer
     const result = {
-      pageTitle,
-      links
+      sets,
+      minifigs,
+      parts,
+      news,
     };
 
-    // Renvoie l'objet JSON en réponse
+    // Enregistrement de l'objet JSON dans une variable jsonString
     console.log(result);
+    const jsonString = JSON.stringify(result);
+
+    // Enregistrer le texte JSON dans un fichier data.json et renvoie de l'objet JSON en réponse au client
+    const filePath = path.join(__dirname, 'public', 'data.json');
+    fs.writeFileSync(filePath, jsonString, 'utf-8');
     res.json(result);
+
+
   } catch (error) {
     console.error(error);
     res.sendStatus(500);

@@ -31,6 +31,7 @@
 			<div id="navrow-sets"></div>
 			<div id="navrow-minifigs"></div>
 			<div id="navrow-parts"></div>
+			<div id="navrow-news"></div>
 		</div>
 
 	</header>
@@ -39,7 +40,7 @@
 		<p>Copyright LEMAIRE Jean-Gabriel &copy; 2023</p>
 	</footer>
 
-	<script type="text/javascript">
+	<script type="text/javascript" src="data.json">
 		const searchForm = document.querySelector('#search-form');
 
 	  	searchForm.addEventListener('submit', function(event) {
@@ -63,13 +64,30 @@
 			})
 			.then(response => {
   			// Gérer la réponse du serveur
+				console.log("Envoi de la variable au serveur NodeJS réussit!")
 			})
+			.then(data => {
+  			// Gérer les données du fichier data.json
+			// Récupérer les données des différentes propriétés de l'objet JSON
+				const setsData = data.sets;
+    			const minifigsData = data.minifigs;
+    			const partsData = data.parts;
+    			const newsData = data.news;
+
+    		// Mettre à jour le contenu des balises avec les données récupérées
+    			setsContainer.innerHTML = setsData;
+    			minifigsContainer.innerHTML = minifigsData;
+    			partsContainer.innerHTML = partsData;
+    			newsContainer.innerHTML = newsData;
+				console.log("Récupération des données du fichier data.json réussit!")
+			// console.log(data);
+			})
+
 			.catch(error => {
   			// Gérer les erreurs
+				console.log("Une erreur s'est produite :", error);
 			});
 		});
-
-		
 
 
 
